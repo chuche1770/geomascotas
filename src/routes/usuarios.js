@@ -5,7 +5,7 @@ module.exports = router;
 
 router.post('/login', (req, res) => {
     const { numUsuario, pin } = req.body;
-    query = "SELECT id, nombre, correo, telefonoPersonal FROM USUARIOS WHERE telefonoPersonal LIKE BINARY ? AND pin LIKE BINARY ?;";
+    const sql = "SELECT id, nombre, correo, telefonoPersonal FROM USUARIOS WHERE telefonoPersonal LIKE BINARY ? AND pin LIKE BINARY ?;";
     mysqlConnection.query(sql, [numUsuario, pin], (err, rows, fields) => {
         if (!err) {
             !(rows.length === 0) ? res.json(rows[0]) : res.json({ Status: "Usuario y/o contraseña incorrectos" });
@@ -27,7 +27,7 @@ router.get('/registro', (req, res) => {
 });
 
 router.post('/registro', (req, res) => {
-    // const { }
+    // const { xd }
 })
 
 // router.get('/:id', (req, res) => {
