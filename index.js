@@ -18,6 +18,7 @@ app.use(morgan('dev'))
 
 // Routes
 app.use(require("./src/routes/usuarios"));
+app.use(require("./src/routes/pets"))
 
 //Starting the Server
 app.listen(app.get('port'), () => {
