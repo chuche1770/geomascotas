@@ -8,7 +8,7 @@ router.post('/login', (req, res) => {
     const sql = "SELECT id, nombre, correo, telefonoPersonal FROM USUARIOS WHERE telefonoPersonal LIKE BINARY ? AND pin LIKE BINARY ?;";
     mysqlConnection.query(sql, [telefonoPersonal, pin], (err, rows, fields) => {
         if (!err) {
-            !(rows.length === 0) ? res.json(rows[0]) : res.json({ Status: "telefono y/o pin incorrectos" });
+            !(rows.length === 0) ? res.json({ Status: "ok", data: rows[0] }) : res.json({ Status: "telefono y/o pin incorrectos" });
         } else {
             console.log(err);
         }
@@ -19,7 +19,7 @@ router.get('/registro', (req, res) => {
     const query = "SELECT * FROM PREGUNTAS_SECRETAS";
     mysqlConnection.query(query, (err, rows, fields) => {
         if (!err) {
-            res.json(rows);
+            res.json({ Status: "ok", rows });
         } else {
             console.log(err);
         }
@@ -35,7 +35,7 @@ router.post('/registro', (req, res) => {
     `;
     mysqlConnection.query(query, [insertReg, nombre, correo, telefonoPersonal, pin, respuestaPreguntaSecreta, PREGUNTAS_SECRETAS_ID], (err, rows, fields) => {
         if (!err) {
-            res.json({ Status: "Usuario Registrado Exitosamente" });
+            res.json({ Status: "ok", msg: "Usuario Registrado Exitosamente" });
         } else {
             console.log("Ocirrio un error al intentar registar el usuario: ", err);
         }

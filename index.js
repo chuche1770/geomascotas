@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const colors = require('colors');
 //Inicializaciones
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(require("./src/routes/pets"))
 
 //Starting the Server
 app.listen(app.get('port'), () => {
-    console.log(app.get('AppName'));
+    console.log(app.get('AppName').brightBlue);
     console.log("Server on port ", app.get('port'));
 })
 
