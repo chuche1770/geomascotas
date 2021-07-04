@@ -4,9 +4,9 @@ const mysqlConnection = require('../database');
 module.exports = router;
 
 router.post('/login', (req, res) => {
-    const { numUsuario, pin } = req.body;
+    const { telefonoPersonal, pin } = req.body;
     const sql = "SELECT id, nombre, correo, telefonoPersonal FROM USUARIOS WHERE telefonoPersonal LIKE BINARY ? AND pin LIKE BINARY ?;";
-    mysqlConnection.query(sql, [numUsuario, pin], (err, rows, fields) => {
+    mysqlConnection.query(sql, [telefonoPersonal, pin], (err, rows, fields) => {
         if (!err) {
             !(rows.length === 0) ? res.json(rows[0]) : res.json({ Status: "telefono y/o pin incorrectos" });
         } else {
@@ -28,12 +28,12 @@ router.get('/registro', (req, res) => {
 
 router.post('/registro', (req, res) => {
     const insertReg = 0;
-    const { name, email, phone, pin, answerSQ, idSQ } = req.body;
+    const { nombre, correo, telefonoPersonal, pin, respuestaPreguntaSecreta, PREGUNTAS_SECRETAS_ID } = req.body;
     // console.log(req.body);
     const query = `
         CALL USUARIOS(?,?,?,?,?,?,?);
     `;
-    mysqlConnection.query(query, [insertReg, name, email, phone, pin, answerSQ, idSQ], (err, rows, fields) => {
+    mysqlConnection.query(query, [insertReg, nombre, correo, telefonoPersonal, pin, respuestaPreguntaSecreta, PREGUNTAS_SECRETAS_ID], (err, rows, fields) => {
         if (!err) {
             res.json({ Status: "Usuario Registrado Exitosamente" });
         } else {
