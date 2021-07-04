@@ -35,7 +35,7 @@ router.post('/registro', (req, res) => {
     `;
     mysqlConnection.query(query, [insertReg, nombre, correo, telefonoPersonal, pin, respuestaPreguntaSecreta, PREGUNTAS_SECRETAS_ID], (err, rows, fields) => {
         if (!err) {
-            res.json({ Status: "ok", msg: "Usuario Registrado Exitosamente" });
+            res.json({ Status: "ok" });
         } else {
             console.log("Ocirrio un error al intentar registar el usuario: ", err);
         }
