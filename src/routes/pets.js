@@ -4,7 +4,7 @@ const mysqlConnection = require('../database');
 module.exports = router;
 
 
-router.get('/listadoMascotas', (req, res) => {
+router.post('/listadoMascotas', (req, res) => {
     const { id } = req.body;
     const query = "SELECT M.id, M.nombre, E.especie FROM MASCOTAS M JOIN ESPECIES E on M.ESPECIES_id = E.id WHERE M.USUARIOS_id = ?;";
     mysqlConnection.query(query, [id], (err, rows, fields) => {
@@ -17,7 +17,7 @@ router.get('/listadoMascotas', (req, res) => {
 });
 
 
-router.get('/listadoEspecies', (req, res) => {
+router.post('/listadoEspecies', (req, res) => {
     const query = "SELECT * FROM ESPECIES";
     mysqlConnection.query(query, (err, rows, fields) => {
         if (!err) {

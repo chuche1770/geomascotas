@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
     });
 });
 
-router.get('/registro', (req, res) => {
+router.post('/registro', (req, res) => {
     const query = "SELECT * FROM PREGUNTAS_SECRETAS";
     mysqlConnection.query(query, (err, rows, fields) => {
         if (!err) {
