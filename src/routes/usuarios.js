@@ -8,7 +8,7 @@ router.post('/login', (req, res) => {
     const sql = "SELECT id, nombre, correo, telefonoPersonal FROM USUARIOS WHERE telefonoPersonal LIKE BINARY ? AND pin LIKE BINARY ?;";
     mysqlConnection.query(sql, [telefonoPersonal, pin], (err, rows, fields) => {
         if (!err) {
-            !(rows.length === 0) ? res.json({ Status: "ok", data: rows[0] }) : res.json({ Status: "telefono y/o pin incorrectos" });
+            !(rows.length === 0) ? res.json({ Status: "ok", data: rows[0] }) : res.json({ Status: "TELEFONO Y/O PIN INCORRECTOS" });
         } else {
             console.log(err);
         }

@@ -26,7 +26,7 @@ router.post('/registroPets', (req, res) => {
             res.json({ Status: "ok" });
         } else {
             console.log("Ocirrio un error al intentar registar la mascota ", err);
-            res.json({ Status: "InsertFailed" });
+            res.json({ Status: "FALLO AL INTENTAR ACTUALIZAR LA MASCOTA" });
         }
     });
 })
