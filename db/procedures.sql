@@ -33,7 +33,7 @@ BEGIN
   SELECT _id AS 'id';
 END
 
-
+-- PROCEDIIENTO ALMACENADO PARA INSERTAR/ ACTUALIZAR MASCOTAS
 
 USE geomascotas;
 
@@ -43,6 +43,7 @@ USE `geomascotas`$$
 CREATE PROCEDURE `petsAddOrEdit` (
   IN _idMascota INT,
   IN _idLocalizador INT,
+  IN _idUser INT,
   IN _name VARCHAR(30),
   IN _especie INT,
   IN _sim VARCHAR(10)
@@ -52,8 +53,8 @@ BEGIN
   INSERT INTO LOCALIZADORES(sim, latitud, longitud) VALUES (_sim, 0, 0);
   SELECT @idLocalizador := id FROM LOCALIZADORES WHERE sim=_sim;
   SELECT @idEspecie := id FROM ESPECIES WHERE especie=_especie;
-  INSERT INTO MASCOTAS (nombre, ESPECIES_ID, LOCALIZADORES_ID)
-    VALUES (_name,@idLocalizador,@idEspecie);
+  INSERT INTO MASCOTAS (nombre,USUARIOS_ID ,ESPECIES_ID, LOCALIZADORES_ID)
+    VALUES (_name,_idUser,@idLocalizador,@idEspecie);
 
     SET _idMascota = LAST_INSERT_ID();
   ELSE
