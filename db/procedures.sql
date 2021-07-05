@@ -32,3 +32,46 @@ BEGIN
 
   SELECT _id AS 'id';
 END
+
+
+
+USE geomascotas;
+
+DELIMITER $$
+USE `geomascotas`$$
+
+CREATE PROCEDURE `petsAddOrEdit` (
+  IN _idMascota INT,
+  IN _idLocalizador INT,
+  IN _name VARCHAR(30),
+  IN _especie INT,
+  IN _sim VARCHAR(10)
+)
+BEGIN 
+  IF _idMascota = 0 THEN
+  INSERT INTO LOCALIZADORES(sim, latitud, longitud) VALUES (_sim, 0, 0);
+  SELECT @idLocalizador := id FROM LOCALIZADORES WHERE sim=_sim;
+  SELECT @idEspecie := id FROM ESPECIES WHERE especie=_especie;
+  INSERT INTO MASCOTAS (nombre, ESPECIES_ID, LOCALIZADORES_ID)
+    VALUES (_name,@idLocalizador,@idEspecie);
+
+    SET _idMascota = LAST_INSERT_ID();
+  ELSE
+    -- Se recuperan primero los idEspecie para saber que especie es la que se se le asiganara a la mascota ahora
+    SELECT @idEspecie := id FROM ESPECIES WHERE especie=_especie;
+
+    UPDATE LOCALIZADORES
+    SET
+    sim = _sim
+    WHERE id = _idLocalizador;
+
+    UPDATE MASCOTAS
+    SET
+    nombre = _name,
+    ESPECIES_ID=@idEspecie
+    WHERE id = _idMascota;
+
+  END IF;
+
+  SELECT _idMascota AS 'id';
+END

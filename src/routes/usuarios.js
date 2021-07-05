@@ -29,7 +29,6 @@ router.get('/registro', (req, res) => {
 router.post('/registro', (req, res) => {
     const insertReg = 0;
     const { nombre, correo, telefonoPersonal, pin, respuestaPreguntaSecreta, PREGUNTAS_SECRETAS_ID } = req.body;
-    // console.log(req.body);
     const query = `
         CALL USUARIOS(?,?,?,?,?,?,?);
     `;

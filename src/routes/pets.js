@@ -15,3 +15,18 @@ router.get('/listadoMascotas', (req, res) => {
         }
     });
 });
+
+router.post('/registroPets', (req, res) => {
+    const insertReg = 0;
+    const { nombre, especie, sim } = req.body;
+    const query = `
+        CALL USUARIOS(?,?,?,?,?);`;
+    mysqlConnection.query(query, [insertReg, insertReg, nombre, especie, sim], (err, rows, fields) => {
+        if (!err) {
+            res.json({ Status: "ok" });
+        } else {
+            console.log("Ocirrio un error al intentar registar la mascota ", err);
+            res.json({ Status: "InsertFailed" });
+        }
+    });
+})

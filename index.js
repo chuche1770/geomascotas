@@ -24,6 +24,6 @@ app.use(require("./src/routes/pets"))
 //Starting the Server
 app.listen(app.get('port'), () => {
     console.log(app.get('AppName').brightBlue);
-    console.log("Server on port ", app.get('port'));
+    console.log("Server on port: ".brightBlue, app.get('port'));
 })
 
