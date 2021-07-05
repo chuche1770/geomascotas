@@ -45,7 +45,7 @@ CREATE PROCEDURE `petsAddOrEdit` (
   IN _idLocalizador INT,
   IN _idUser INT,
   IN _name VARCHAR(30),
-  IN _especie INT,
+  IN _especie VARCHAR(20),
   IN _sim VARCHAR(10)
 )
 BEGIN 

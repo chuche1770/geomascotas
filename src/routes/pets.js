@@ -32,7 +32,7 @@ router.post('/registroPets', (req, res) => {
     const insertReg = 0;
     const { nombre, USUARIOS_id, especie, sim } = req.body;
     const query = `
-        CALL USUARIOS(?,?,?,?,?,?);`;
+        CALL petsAddOrEdit(?,?,?,?,?,?);`;
     mysqlConnection.query(query, [insertReg, insertReg, USUARIOS_id, nombre, especie, sim], (err, rows, fields) => {
         if (!err) {
             res.json({ Status: "ok" });
